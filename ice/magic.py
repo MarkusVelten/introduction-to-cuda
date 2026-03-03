@@ -57,7 +57,7 @@ class ICEMagic(magic.Magics):
         compute_capability = cc_text.stdout.decode('utf-8').strip().replace('.', '')
 
         for case, flags in { 'base' : ['O3', 'march=native', 'std=c++17', 'Wall'],
-                                'cuda' : ['O3', f'arch=sm_{compute_capability}'],
+                                'cuda' : ['O3', f'arch=sm_{compute_capability}', 'I./code'],
                                 'omp' : ['O3', 'march=native', 'std=c++17', 'Wall', 'fopenmp'],
                                 'omp-target' : ['O3', 'std=c++17', 'mp=gpu'] }.items():
             self.argparsers[case].add_argument('-F', '--def-flags', help='overwrites default compiler flags to be used', nargs='+', default=flags)
@@ -66,7 +66,7 @@ class ICEMagic(magic.Magics):
         # chrono and thread are required for sleeping
         # omp.h is required for OpenMP API functions
         for case, includes in { 'base' : ['iostream', 'iomanip', 'chrono', 'thread'],
-                                'cuda' : ['iostream', 'iomanip', 'chrono', 'thread', 'cuda/cmath', 'code/util.h'],
+                                'cuda' : ['iostream', 'iomanip', 'chrono', 'thread', 'cuda/cmath', 'util.h'],
                                 'omp' : ['iostream', 'iomanip', 'chrono', 'thread', 'omp.h'],
                                 'omp-target' : ['iostream', 'iomanip', 'chrono', 'thread', 'omp.h'] }.items():
             self.argparsers[case].add_argument('-I', '--def-include', help='overwrites default includes to be added', nargs='+', default=includes)
