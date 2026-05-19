@@ -7,7 +7,7 @@
 
 constexpr size_t numFMA = 1024 * 1024;
 
-__global__ void fma(float* data, size_t numElements) {
+__global__ void work(float* data, size_t numElements) {
     for (size_t i0 = blockIdx.x * blockDim.x + threadIdx.x; i0 < numElements; i0 += blockDim.x * gridDim.x) {
         float acc = i0;
 
@@ -30,14 +30,14 @@ int main(int argc, char *argv[]) {
     checkCudaError(cudaMalloc(&d_data, numElements * sizeof(float)));
 
     //# warm-up
-    fma<<<numBlocks, numThreadsPerBlock>>>(d_data, numElements);
+    work<<<numBlocks, numThreadsPerBlock>>>(d_data, numElements);
 
     cudaDeviceSynchronize();
     auto start = std::chrono::steady_clock::now();
 
     //# main 'work'
     for (auto it = 0; it < numIterations; ++it) {
-        fma<<<numBlocks, numThreadsPerBlock>>>(d_data, numElements);
+        work<<<numBlocks, numThreadsPerBlock>>>(d_data, numElements);
     }
 
     cudaDeviceSynchronize();
