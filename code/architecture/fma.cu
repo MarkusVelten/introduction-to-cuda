@@ -21,7 +21,7 @@ __global__ void fma(float* data, size_t numElements) {
 }
 
 int main(int argc, char *argv[]) {
-    auto numBlocks = 84 * 3 + 1;
+    auto numBlocks = 84 * 0 + 1; //# start with one block, then vary the number of blocks to see how it affects performance
     auto numThreadsPerBlock = 256;
     auto numElements = numBlocks * numThreadsPerBlock;
     auto numIterations = 10;
