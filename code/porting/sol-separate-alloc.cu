@@ -29,7 +29,7 @@ int main(int argc, char *argv[]) {
 
     //# main 'work'
     for (int it = 0; it < numIterations; ++it) {
-        auto numBlocks = 108 * 32;
+        auto numBlocks = 84 * 32;
         auto numThreadsPerBlock = 256;
         increase<<<numBlocks, numThreadsPerBlock>>>(d_data, numElements);
     }
