@@ -15,5 +15,5 @@ __global__ void kernel(int numThreads) {
 int main(int argc, char *argv[]) {
     int numThreads = 2;
     kernel<<<1, numThreads>>>(numThreads);
-    cudaDeviceSynchronize();
+    checkCudaError(cudaDeviceSynchronize(), true);
 }

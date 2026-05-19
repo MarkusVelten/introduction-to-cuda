@@ -32,7 +32,7 @@ int main(int argc, char *argv[]) {
     //# warm-up
     work<<<numBlocks, numThreadsPerBlock>>>(d_data, numElements);
 
-    cudaDeviceSynchronize();
+    checkCudaError(cudaDeviceSynchronize());
     auto start = std::chrono::steady_clock::now();
 
     //# main 'work'
@@ -40,7 +40,7 @@ int main(int argc, char *argv[]) {
         work<<<numBlocks, numThreadsPerBlock>>>(d_data, numElements);
     }
 
-    cudaDeviceSynchronize();
+    checkCudaError(cudaDeviceSynchronize(), true);
     auto end = std::chrono::steady_clock::now();
 
     const std::chrono::duration<double> elapsedSeconds = end - start;
@@ -48,5 +48,5 @@ int main(int argc, char *argv[]) {
     std::cout << "Time elapsed:          " << elapsedSeconds.count() << " s\n";
     std::cout << "Estimated performance: " << 1e-12 * numFlopsPerElement * numElements * numIterations / elapsedSeconds.count() << " TFLOP/s\n";
 
-    cudaFree(d_data);
+    checkCudaError(cudaFree(d_data));
 }

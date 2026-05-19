@@ -7,10 +7,10 @@
 
 int main() {
     int device;
-    cudaGetDevice(&device);
+    checkCudaError(cudaGetDevice(&device));
 
     cudaDeviceProp prop{};
-    cudaGetDeviceProperties(&prop, device);
+    checkCudaError(cudaGetDeviceProperties(&prop, device));
 
     std::cout << "\nDevice " << device << ": " << prop.name << "\n";
     std::cout << "  Compute Capability: " << prop.major << "." << prop.minor << "\n";

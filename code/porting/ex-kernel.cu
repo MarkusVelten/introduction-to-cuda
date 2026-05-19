@@ -16,7 +16,7 @@ int main(int argc, char *argv[]) {
     size_t numIterations = 8;
 
     size_t *data;
-    cudaMallocManaged(&data, numElements * sizeof(size_t));
+    checkCudaError(cudaMallocManaged(&data, numElements * sizeof(size_t)));
 
     initializeData(data, numElements);
 
@@ -27,5 +27,5 @@ int main(int argc, char *argv[]) {
 
     verifyData(data, numElements, numIterations);
 
-    cudaFree(data);
+    checkCudaError(cudaFree(data));
 }

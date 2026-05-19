@@ -20,20 +20,20 @@ int main(int argc, char *argv[]) {
     int acc = 0;
 
     int *d_acc;
-    cudaMalloc(&d_acc, sizeof(int));
+    checkCudaError(cudaMalloc(&d_acc, sizeof(int)));
 
     //# warm-up
     reduce<<<84 * 32, 256>>>(d_acc, numElements);
 
     //# reset accumulator
-    cudaMemset(d_acc, 0, sizeof(int));
+    checkCudaError(cudaMemset(d_acc, 0, sizeof(int)));
 
     auto start = std::chrono::steady_clock::now();
 
     //# run reduction
     reduce<<<84 * 32, 256>>>(d_acc, numElements);
 
-    cudaDeviceSynchronize();
+    checkCudaError(cudaDeviceSynchronize(), true);
     auto end = std::chrono::steady_clock::now();
 
     const std::chrono::duration<double> elapsedSeconds = end - start;
@@ -41,9 +41,9 @@ int main(int argc, char *argv[]) {
     std::cout << "Estimated performance: " << 1e-9 * numElements / elapsedSeconds.count() << " GFLOP/s\n";
 
     //# copy data back to host
-    cudaMemcpy(&acc, d_acc, sizeof(int), cudaMemcpyDeviceToHost);
+    checkCudaError(cudaMemcpy(&acc, d_acc, sizeof(int), cudaMemcpyDeviceToHost));
 
     std::cout << "Accumulator: " << acc << " (should be " << numElements << ")" << std::endl;
 
-    cudaFree(d_acc);
+    checkCudaError(cudaFree(d_acc));
 }

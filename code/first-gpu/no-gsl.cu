@@ -17,5 +17,5 @@ int main(int argc, char *argv[]) {
     int numBlocks = cuda::ceil_div(10, numThreadsPerBlock);
 
     kernel<<<numBlocks, numThreadsPerBlock>>>();
-    cudaDeviceSynchronize();
+    checkCudaError(cudaDeviceSynchronize(), true);
 }

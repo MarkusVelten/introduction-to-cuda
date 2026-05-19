@@ -18,5 +18,5 @@ int main(int argc, char *argv[]) {
     int numThreadsPerBlock = 2;
 
     kernel<<<numBlocks, numThreadsPerBlock>>>();
-    cudaDeviceSynchronize();
+    checkCudaError(cudaDeviceSynchronize(), true);
 }

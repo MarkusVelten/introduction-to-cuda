@@ -24,7 +24,7 @@ int main(int argc, char *argv[]) {
     initializeData(data, numElements);
 
     int device;
-    cudaGetDevice(&device);
+    checkCudaError(cudaGetDevice(&device));
 
     //# old version: checkCudaError(cudaMemPrefetchAsync(data, numElements * sizeof(size_t), device));
     checkCudaError(cudaMemPrefetchAsync(data, numElements * sizeof(size_t), { .type = cudaMemLocationTypeDevice, .id = device }, 0));
