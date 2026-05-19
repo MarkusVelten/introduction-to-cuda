@@ -15,7 +15,7 @@ __global__ void fma(float* data, size_t numElements) {
             acc = 0.12f * acc + 1.2f;
 
         //# dummy check to prevent compiler from eliminating loop
-        if (0.0 == acc)
+        if (0.f == acc)
             data[i0] = acc;
     }
 }
