@@ -10,7 +10,7 @@ int main(int argc, char *argv[]) {
     size_t numIterations = 8;
 
     size_t *data;
-    cudaMallocManaged(&data, numElements * sizeof(double));
+    cudaMallocManaged(&data, numElements * sizeof(size_t));
 
     initializeData(data, numElements);
 

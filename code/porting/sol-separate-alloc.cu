@@ -18,14 +18,14 @@ int main(int argc, char *argv[]) {
     size_t numIterations = 8;
 
     size_t *data;
-    checkCudaError(cudaMallocHost(&data, numElements * sizeof(double)));
+    checkCudaError(cudaMallocHost(&data, numElements * sizeof(size_t)));
     size_t *d_data;
-    checkCudaError(cudaMalloc(&d_data, numElements * sizeof(double)));
+    checkCudaError(cudaMalloc(&d_data, numElements * sizeof(size_t)));
 
     initializeData(data, numElements);
 
     //# copy data to device
-    checkCudaError(cudaMemcpy(d_data, data, numElements * sizeof(double), cudaMemcpyHostToDevice));
+    checkCudaError(cudaMemcpy(d_data, data, numElements * sizeof(size_t), cudaMemcpyHostToDevice));
 
     //# main 'work'
     for (int it = 0; it < numIterations; ++it) {
@@ -36,7 +36,7 @@ int main(int argc, char *argv[]) {
     checkCudaError(cudaDeviceSynchronize());
 
     //# copy data back to host
-    checkCudaError(cudaMemcpy(data, d_data, numElements * sizeof(double), cudaMemcpyDeviceToHost));
+    checkCudaError(cudaMemcpy(data, d_data, numElements * sizeof(size_t), cudaMemcpyDeviceToHost));
 
     verifyData(data, numElements, numIterations);
 

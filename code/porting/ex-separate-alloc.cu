@@ -19,14 +19,14 @@ int main(int argc, char *argv[]) {
     size_t numIterations = 8;
 
     size_t *data;
-    checkCudaError(cudaMallocManaged(&data, numElements * sizeof(double)));
+    checkCudaError(cudaMallocManaged(&data, numElements * sizeof(size_t)));
 
     initializeData(data, numElements);
 
     int device;
     cudaGetDevice(&device);
 
-    checkCudaError(cudaMemPrefetchAsync(data, numElements * sizeof(double), { .type = cudaMemLocationTypeDevice, .id = device }, 0));
+    checkCudaError(cudaMemPrefetchAsync(data, numElements * sizeof(size_t), { .type = cudaMemLocationTypeDevice, .id = device }, 0));
 
     //# main 'work'
     for (int it = 0; it < numIterations; ++it) {
@@ -36,7 +36,7 @@ int main(int argc, char *argv[]) {
     }
     checkCudaError(cudaDeviceSynchronize(), true);
 
-    checkCudaError(cudaMemPrefetchAsync(data, numElements * sizeof(double), { .type = cudaMemLocationTypeHost }, 0));
+    checkCudaError(cudaMemPrefetchAsync(data, numElements * sizeof(size_t), { .type = cudaMemLocationTypeHost }, 0));
 
     verifyData(data, numElements, numIterations);
 
