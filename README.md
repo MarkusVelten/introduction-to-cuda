@@ -26,6 +26,10 @@ It follows this general agenda:
 1. [Reductions](./05-reductions.ipynb)
 1. [Summary & Outlook](./06-summary-outlook.ipynb)
 
+This course also includes the following additional material:
+
+1. [Debugging](./07-debugging.ipynb)
+
 ## Start
 
 To start, clone the repository on your target system (and on your notebook/ workstation to visualize the profiles locally)
