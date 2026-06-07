@@ -25,6 +25,9 @@ int main(int argc, char *argv[]) {
     int *d_acc;
     checkCudaError(cudaMalloc(&d_acc, sizeof(int)));
 
+    //# set accumulator
+    checkCudaError(cudaMemset(d_acc, 0, sizeof(int)));
+
     //# warm-up
     reduce<<<84 * 32, 256>>>(d_acc, numElements);
 
