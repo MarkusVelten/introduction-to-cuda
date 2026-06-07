@@ -15,24 +15,24 @@ __global__ void reduce(int* acc, int numElements) {
         thread_acc += 1;
 
     //# allocate shared memory
-    __shared__ int block_acc[1];
+    __shared__ int block_acc;
 
     //# initialize shared memory
     if (0 == threadIdx.x)
-        block_acc[0] = 0;
+        block_acc = 0;
 
     //# synchronize threads in the block
     __syncthreads();
 
     //# accumulate to shared memory
-    atomicAdd(&block_acc[0], thread_acc);
+    atomicAdd(&block_acc, thread_acc);
 
     //# synchronize threads in the block
     __syncthreads();
 
     //# accumulate block result to global memory
     if (0 == threadIdx.x)
-        atomicAdd(&acc[0], block_acc[0]);
+        atomicAdd(&acc[0], block_acc);
 }
 
 int main(int argc, char *argv[]) {
