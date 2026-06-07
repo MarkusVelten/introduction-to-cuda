@@ -29,6 +29,7 @@ It follows this general agenda:
 This course also includes the following additional material:
 
 1. [Debugging](./07-debugging.ipynb)
+1. [Streams](./08-streams.ipynb)
 
 ## Start
 
