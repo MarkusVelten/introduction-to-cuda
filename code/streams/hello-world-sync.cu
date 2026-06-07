@@ -25,5 +25,5 @@ int main() {
     for (int s = 0; s < numStreams; ++s)
         checkCudaError(cudaStreamDestroy(streams[s]));
 
-    cudaDeviceSynchronize();
+    checkCudaError(cudaDeviceSynchronize(), true);
 }

@@ -32,7 +32,7 @@ int main(int argc, char *argv[]) {
     //# warm-up
     work<<<numBlocks, numThreadsPerBlock>>>(d_data, numElements);
 
-    checkCudaError(cudaDeviceSynchronize());
+    checkCudaError(cudaDeviceSynchronize(), true);
     auto start = std::chrono::steady_clock::now();
 
     //# main 'work'

@@ -33,7 +33,7 @@ int main(int argc, char *argv[]) {
         auto numThreadsPerBlock = 256;
         increase<<<numBlocks, numThreadsPerBlock>>>(d_data, numElements);
     }
-    checkCudaError(cudaDeviceSynchronize());
+    checkCudaError(cudaDeviceSynchronize(), true);
 
     //# copy data back to host
     checkCudaError(cudaMemcpy(data, d_data, numElements * sizeof(size_t), cudaMemcpyDeviceToHost));
