@@ -6,7 +6,7 @@
 #include <util.h>
 
 __global__ void fillArray(int* data, int numElements) {
-    auto idx = blockIdx.x * blockDim.x + threadIdx.x;
+    int idx = blockIdx.x * blockDim.x + threadIdx.x;
 
     //# BUG: if (idx < numElements) check is missing
     data[idx] = idx;

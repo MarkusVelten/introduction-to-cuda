@@ -8,7 +8,7 @@
 constexpr size_t numFMA = 1024 * 1024;
 
 __global__ void work(float* data, size_t numElements) {
-    for (size_t i0 = blockIdx.x * blockDim.x + threadIdx.x; i0 < numElements; i0 += blockDim.x * gridDim.x) {
+    for (int i0 = blockIdx.x * blockDim.x + threadIdx.x; i0 < numElements; i0 += blockDim.x * gridDim.x) {
         float acc = i0;
 
         for (auto r = 0; r < numFMA; ++r)

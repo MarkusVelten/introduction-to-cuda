@@ -6,10 +6,10 @@
 #include <util.h>
 
 __global__ void increase(size_t* data, size_t numElements) {
-    size_t start = blockIdx.x * blockDim.x + threadIdx.x;
-    size_t stride = blockDim.x * gridDim.x;
+    int start = blockIdx.x * blockDim.x + threadIdx.x;
+    int stride = blockDim.x * gridDim.x;
 
-    for (size_t i = start; i < numElements; i += stride)
+    for (int i = start; i < numElements; i += stride)
         data[i] += 1;
 }
 

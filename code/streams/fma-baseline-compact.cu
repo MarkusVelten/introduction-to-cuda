@@ -6,7 +6,7 @@
 #include <util.h>
 
 __global__ void fmaKernel(float* data, float scale, float add, int numFMA, int numElements) {
-    for (auto i = blockIdx.x * blockDim.x + threadIdx.x; i < numElements; i += blockDim.x * gridDim.x) {
+    for (int i = blockIdx.x * blockDim.x + threadIdx.x; i < numElements; i += blockDim.x * gridDim.x) {
         float acc = data[i];
         for (int r = 0; r < numFMA; ++r)
             acc = scale * acc + add;

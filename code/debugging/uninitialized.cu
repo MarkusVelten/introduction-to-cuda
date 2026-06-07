@@ -6,7 +6,7 @@
 #include <util.h>
 
 __global__ void addOne(int* data, int numElements) {
-    auto idx = blockIdx.x * blockDim.x + threadIdx.x;
+    int idx = blockIdx.x * blockDim.x + threadIdx.x;
 
     if (idx < numElements)
         data[idx] += 1;
