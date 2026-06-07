@@ -33,8 +33,8 @@ int main() {
 
     //# TODO: create four streams (streamA, streamB, streamC, streamD)
 
-    //# run an empty kernel once to mitigate startup effects
-    fmaKernel<<<1, 1>>>(0, 0, 0, 0, 0);
+    //# run an empty kernel once to mitigate startup effects - nullptr will never be accessed
+    fmaKernel<<<1, 1>>>(nullptr, 0, 0, 0, 0);
 
     auto start = std::chrono::steady_clock::now();
 

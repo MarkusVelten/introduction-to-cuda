@@ -31,8 +31,8 @@ int main() {
     for (int i = 0; i < numElements; ++i)
         dataA[i] = dataB[i] = dataC[i] = dataD[i] = (float)i;
 
-    //# run an empty kernel once to mitigate startup effects
-    fmaKernel<<<1, 1>>>(0, 0, 0, 0, 0);
+    //# run an empty kernel once to mitigate startup effects - nullptr will never be accessed
+    fmaKernel<<<1, 1>>>(nullptr, 0, 0, 0, 0);
 
     auto start = std::chrono::steady_clock::now();
 
