@@ -24,7 +24,7 @@ inline void initializeData(size_t* data, size_t numElements) {
 
 
 inline void verifyData(const size_t* data, size_t numElements, size_t numIterations) {
-    for (int i = 0; i < numElements; ++i) {
+    for (size_t i = 0; i < numElements; ++i) {
         auto expected = (i + 1337) + numIterations;
         if (data[i] != expected) {
             std::cout << "Error at index " << i << ": got " << data[i] << ", expected " << expected << std::endl;
