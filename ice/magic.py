@@ -54,7 +54,7 @@ class ICEMagic(magic.Magics):
 
         # get compute capability for cuda case
         cc_text = subprocess.run(['nvidia-smi', '--query-gpu=compute_cap', '--format=csv,noheader'], capture_output=True)
-        compute_capability = cc_text.stdout.decode('utf-8').strip().replace('.', '')
+        compute_capability = cc_text.stdout.decode('utf-8').strip().split('\n')[0].replace('.', '')
 
         for case, flags in { 'base' : ['O3', 'march=native', 'std=c++17', 'Wall'],
                                 'cuda' : ['O3', f'arch=sm_{compute_capability}', 'I./code'],
