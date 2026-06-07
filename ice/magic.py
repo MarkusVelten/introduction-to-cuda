@@ -123,7 +123,11 @@ std::cout << "Total time: " << 1e3 * (end - start) << " ms" << std::endl;'''
         if self.args.verbose:
             print(f'Compiling with   {" ".join(cmdline)}')
 
-        subprocess.check_call(cmdline)
+        try:
+            subprocess.check_call(cmdline)
+        except subprocess.CalledProcessError as e:
+            print(f'Compilation failed with error code {e.returncode}')
+            return
 
         # prefix binary with nsys if required
         bin_call = [self.args.binary]
@@ -139,7 +143,11 @@ std::cout << "Total time: " << 1e3 * (end - start) << " ms" << std::endl;'''
                 print(f'Executing        {" ".join(bin_call)}')
                 print()
 
-            subprocess.check_call(bin_call)
+            try:
+                subprocess.check_call(bin_call)
+            except subprocess.CalledProcessError as e:
+                print(f'Execution failed with error code {e.returncode}')
+                return
         else:
             env = os.environ.copy()
             for e in self.args.env:
@@ -150,7 +158,11 @@ std::cout << "Total time: " << 1e3 * (end - start) << " ms" << std::endl;'''
                 print(f'Executing        {" ".join(self.args.env)} {" ".join(bin_call)}')
                 print()
 
-            subprocess.check_call(bin_call, env=env)
+            try:
+                subprocess.check_call(bin_call, env=env)
+            except subprocess.CalledProcessError as e:
+                print(f'Execution failed with error code {e.returncode}')
+                return
 
 
     def ice(self, line, cell, parser_case):
