@@ -3,7 +3,7 @@
 #include <chrono>
 #include <thread>
 #include <cuda/cmath>
-#include <code/util.h>
+#include <util.h>
 
 int main(int argc, char *argv[]) {
     size_t numElements = 4 * 1024 * 1024;

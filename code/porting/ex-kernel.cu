@@ -3,7 +3,7 @@
 #include <chrono>
 #include <thread>
 #include <cuda/cmath>
-#include <code/util.h>
+#include <util.h>
 
 void increase(size_t* data, size_t numElements) {
     for (int i = 0; i < numElements; ++i) {

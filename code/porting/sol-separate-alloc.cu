@@ -3,7 +3,7 @@
 #include <chrono>
 #include <thread>
 #include <cuda/cmath>
-#include <code/util.h>
+#include <util.h>
 
 __global__ void increase(size_t* data, size_t numElements) {
     size_t start = blockIdx.x * blockDim.x + threadIdx.x;

@@ -3,7 +3,7 @@
 #include <chrono>
 #include <thread>
 #include <cuda/cmath>
-#include <code/util.h>
+#include <util.h>
 
 __global__ void kernel() {
     printf("Hello world from thread %d\n", threadIdx.x);

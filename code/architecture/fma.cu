@@ -3,7 +3,7 @@
 #include <chrono>
 #include <thread>
 #include <cuda/cmath>
-#include <code/util.h>
+#include <util.h>
 
 constexpr size_t numFMA = 1024 * 1024;
 
@@ -22,7 +22,7 @@ __global__ void work(float* data, size_t numElements) {
 
 int main(int argc, char *argv[]) {
     auto numBlocks = 84 * 0 + 1; //# start with one block, then vary the number of blocks to see how it affects performance
-    auto numThreadsPerBlock = 256;
+    auto numThreadsPerBlock = 64;
     auto numElements = numBlocks * numThreadsPerBlock;
     auto numIterations = 10;
 

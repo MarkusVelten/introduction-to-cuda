@@ -3,7 +3,7 @@
 #include <chrono>
 #include <thread>
 #include <cuda/cmath>
-#include <code/util.h>
+#include <util.h>
 
 __global__ void reduce(int* acc, int numElements) {
     int start = blockIdx.x * blockDim.x + threadIdx.x;
