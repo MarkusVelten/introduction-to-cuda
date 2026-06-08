@@ -135,7 +135,7 @@ std::cout << "Total time: " << 1e3 * (end - start) << " ms" << std::endl;'''
             add_args = []
             if self.args.profile_file:
                 add_args = ['-o', self.args.profile_file, '--force-overwrite=true']
-            bin_call = ['nsys', 'profile', '--stats=true'] + add_args + bin_call
+            bin_call = ['nsys', 'profile', '--stats=true', '--trace=cuda'] + add_args + bin_call
 
         # execute binary
         if 0 == len(self.args.env):
