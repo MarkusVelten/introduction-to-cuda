@@ -56,10 +56,10 @@ class ICEMagic(magic.Magics):
         cc_text = subprocess.run(['nvidia-smi', '--query-gpu=compute_cap', '--format=csv,noheader'], capture_output=True)
         compute_capability = cc_text.stdout.decode('utf-8').strip().split('\n')[0].replace('.', '')
 
-        for case, flags in { 'base' : ['O3', 'march=native', 'std=c++17', 'Wall'],
-                                'cuda' : ['O3', f'arch=sm_{compute_capability}', 'I./code'],
-                                'omp' : ['O3', 'march=native', 'std=c++17', 'Wall', 'fopenmp'],
-                                'omp-target' : ['O3', 'std=c++17', 'mp=gpu'] }.items():
+        for case, flags in { 'base' : ['O3', 'march=native', 'std=c++20', 'Wall'],
+                                'cuda' : ['O3', f'arch=sm_{compute_capability}', 'std=c++20', 'I./code'],
+                                'omp' : ['O3', 'march=native', 'std=c++20', 'Wall', 'fopenmp'],
+                                'omp-target' : ['O3', 'std=c++20', 'mp=gpu'] }.items():
             self.argparsers[case].add_argument('-F', '--def-flags', help='overwrites default compiler flags to be used', nargs='+', default=flags)
 
         # iostream is required for printing
