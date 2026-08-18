@@ -15,7 +15,7 @@ A copy of all profiles obtained is also included in this repository.
 
 ## Course Content
 
-All course material is collected and available at [https://github.com/SebastianKuckuk/introduction-to-cuda](https://github.com/SebastianKuckuk/introduction-to-cuda) (this repository).
+All course material is collected and available at [https://github.com/NHR-FAU-Training/introduction-to-cuda](https://github.com/NHR-FAU-Training/introduction-to-cuda) (this repository).
 
 It follows this general agenda:
 
@@ -35,7 +35,7 @@ This course also includes the following additional material:
 
 To start, clone the repository on your target system (and on your notebook/ workstation to visualize the profiles locally)
 ```bash
-git clone https://github.com/SebastianKuckuk/introduction-to-cuda.git
+git clone https://github.com/NHR-FAU-Training/introduction-to-cuda.git
 ```
 
 Then head over to the [Introduction](./01-introduction.ipynb) notebook.
