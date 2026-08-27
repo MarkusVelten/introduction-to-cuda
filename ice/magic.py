@@ -31,8 +31,8 @@ class ICEMagic(magic.Magics):
         # query TMPDIR
         env = os.environ
         tmpdir = env['HOME']
-        if 'TMPDIR' in env:
-            tmpdir = env['TMPDIR']
+        #if 'TMPDIR' in env: #we cannot use /tmp on Alpha Centauri, since all users are sharing the same tmp directory
+        #    tmpdir = env['TMPDIR']
         print(f'Using temporary directory {tmpdir}')
 
         # set magic arguments with common default values
@@ -66,7 +66,7 @@ class ICEMagic(magic.Magics):
         # chrono and thread are required for sleeping
         # omp.h is required for OpenMP API functions
         for case, includes in { 'base' : ['iostream', 'iomanip', 'chrono', 'thread'],
-                                'cuda' : ['iostream', 'iomanip', 'chrono', 'thread', 'cuda/cmath', 'util.h'],
+                                'cuda' : ['iostream', 'iomanip', 'chrono', 'thread', 'cmath', 'util.h'], #the older NVHPC does not have cmath in cuda/cmath
                                 'omp' : ['iostream', 'iomanip', 'chrono', 'thread', 'omp.h'],
                                 'omp-target' : ['iostream', 'iomanip', 'chrono', 'thread', 'omp.h'] }.items():
             self.argparsers[case].add_argument('-I', '--def-include', help='overwrites default includes to be added', nargs='+', default=includes)
